@@ -16,6 +16,7 @@ def promptToPlayAgain():
     if userResponse.upper() == 'Y':
         ticTacToe()
 
+
 def printBoard(board):
     EMPTYROW = " *     *     *     *"
     DIVIDER = " * * * * * * * * * *"
@@ -23,29 +24,38 @@ def printBoard(board):
     INPUTROWSECTION2 = "  *  "
     INPUTROWSECTION3 = "  *  "
     INPUTROWSECTION4 = "  *"
+    NL = '\n'
 
-    print(DIVIDER)
-    print(EMPTYROW)
-    print(INPUTROWSECTION1 + board[0][0] + INPUTROWSECTION2 + board[0][1] + INPUTROWSECTION3 + board[0][
-        2] + INPUTROWSECTION4)
-    print(EMPTYROW)
-    print(DIVIDER)
-    print(EMPTYROW)
-    print(INPUTROWSECTION1 + board[1][0] + INPUTROWSECTION2 + board[1][1] + INPUTROWSECTION3 + board[1][
-        2] + INPUTROWSECTION4)
-    print(EMPTYROW)
-    print(DIVIDER)
-    print(EMPTYROW)
-    print(INPUTROWSECTION1 + board[2][0] + INPUTROWSECTION2 + board[2][1] + INPUTROWSECTION3 + board[2][
-        2] + INPUTROWSECTION4)
-    print(EMPTYROW)
-    print(DIVIDER)
+    builtBoardString = ""
+
+    builtBoardString += DIVIDER + NL
+    builtBoardString += EMPTYROW + NL
+    builtBoardString += INPUTROWSECTION1 + board[0][0]
+    builtBoardString += INPUTROWSECTION2 + board[0][1]
+    builtBoardString += INPUTROWSECTION3 + board[0][2] + INPUTROWSECTION4 + NL
+    builtBoardString += EMPTYROW + NL
+    builtBoardString += DIVIDER + NL
+    builtBoardString += EMPTYROW + NL
+    builtBoardString += INPUTROWSECTION1 + board[1][0]
+    builtBoardString += INPUTROWSECTION2 + board[1][1]
+    builtBoardString += INPUTROWSECTION3 + board[1][2] + INPUTROWSECTION4 + NL
+    builtBoardString += EMPTYROW + NL
+    builtBoardString += DIVIDER + NL
+    builtBoardString += EMPTYROW + NL
+    builtBoardString += INPUTROWSECTION1 + board[2][0]
+    builtBoardString += INPUTROWSECTION2 + board[2][1]
+    builtBoardString += INPUTROWSECTION3 + board[2][2] + INPUTROWSECTION4 + NL
+    builtBoardString += EMPTYROW + NL
+    builtBoardString += DIVIDER
+
+    print(builtBoardString)
 
 
 def printInstructions():
     instructionBoard = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
 
     printBoard(instructionBoard)
+
 
 def cellNumToBoardIndex(cellNum):
     boardMap = {
@@ -61,6 +71,7 @@ def cellNumToBoardIndex(cellNum):
     }
 
     return boardMap[cellNum]
+
 
 def validUserSelection(userResponse, board):
     try:
@@ -80,22 +91,27 @@ def validUserSelection(userResponse, board):
 
     return True
 
+
 def checkIfAPlayerWon(board, currentPlayer):
     for interator in range(3):
-        if board[0][interator] == currentPlayer and board[1][interator] == currentPlayer and board[2][interator] == currentPlayer:
+        if board[0][interator] == currentPlayer and board[1][interator] == currentPlayer and board[2][
+            interator] == currentPlayer:
             return True
-        if board[interator][0] == currentPlayer and board[interator][1] == currentPlayer and board[interator][2] == currentPlayer:
+        if board[interator][0] == currentPlayer and board[interator][1] == currentPlayer and board[interator][
+            2] == currentPlayer:
             return True
     if board[0][0] == currentPlayer and board[1][1] == currentPlayer and board[2][2] == currentPlayer:
         return True
     if board[0][2] == currentPlayer and board[1][1] == currentPlayer and board[2][0] == currentPlayer:
         return True
 
+
 def swapPlayer(currentPlayer):
     if currentPlayer == 'X':
         return 'O'
     else:
         return 'X'
+
 
 def ticTacToe():
     gameInProgress = True
@@ -125,5 +141,6 @@ def ticTacToe():
             roundNumber += 1
 
     promptToPlayAgain()
+
 
 ticTacToe()

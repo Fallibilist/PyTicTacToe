@@ -1,17 +1,17 @@
 def determineStartPlayer():
-    userResponse = input("Please pick first player, marker 'X' or 'O'\n")
+    userResponse = input("\nPlease pick first player, marker 'X' or 'O': ")
 
     while (userResponse.upper() != 'X' and userResponse.upper() != 'O'):
-        userResponse = input("Invalid Reponse\nPlease pick first player, marker 'X' or 'O'\n")
+        userResponse = input("Invalid Reponse\nPlease pick first player, marker 'X' or 'O': ")
 
     return userResponse.upper()
 
 
 def promptToPlayAgain():
-    userResponse = input("Would you like to play again? (Y/N)")
+    userResponse = input("Would you like to play again? (Y/N): ")
 
     while (userResponse.upper() != 'Y' and userResponse.upper() != 'N'):
-        userResponse = input("Invalid Reponse\nWould you like to play again? (Y/N)\n")
+        userResponse = input("Invalid Reponse\nWould you like to play again? (Y/N): ")
 
     if userResponse.upper() == 'Y':
         ticTacToe()
@@ -101,11 +101,13 @@ def ticTacToe():
     gameInProgress = True
     currentPlayer = determineStartPlayer()
     board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+    roundNumber = 1
 
     printInstructions()
 
     while gameInProgress:
-        userResponse = input("(" + currentPlayer + ") Enter a number corresponding to an available cell (1-9): ")
+        print("\nRound " + str(roundNumber))
+        userResponse = input("Player " + currentPlayer + " - Enter a number corresponding to an available cell (1-9): ")
         if validUserSelection(userResponse, board):
             boardIndexTuple = cellNumToBoardIndex(int(userResponse))
             board[boardIndexTuple[0]][boardIndexTuple[1]] = currentPlayer
@@ -113,9 +115,14 @@ def ticTacToe():
 
             if checkIfAPlayerWon(board, currentPlayer):
                 gameInProgress = False
-                print('Player ' + currentPlayer + ' just won!')
-                break;
+                print('\nPlayer ' + currentPlayer + ' just won!\n')
+                break
+            elif roundNumber == 9:
+                gameInProgress = False
+                print("\nIt's a draw!\n")
+                break
             currentPlayer = swapPlayer(currentPlayer)
+            roundNumber += 1
 
     promptToPlayAgain()
 
